@@ -133,6 +133,11 @@ var Annotation = new Schema({
         admin: [String],
         update: [String],
         delete: [String]
+    },
+    legacy: {
+        type: Boolean,
+        required: false,
+        default: false
     }
 });
 
@@ -281,7 +286,8 @@ app.post('/api/annotations', tokenOK, function(req, res) {
         uuid: req.body.uuid,
         ranges: req.body.ranges,
         shapes: req.body.shapes,
-        permissions: req.body.permissions
+        permissions: req.body.permissions,
+        legacy: req.body.legacy
     });
 
     annotation.save(function(err) {
@@ -318,6 +324,7 @@ app.put('/api/annotations/:id', tokenOK, function(req, res) {
         annotation.uuid = req.body.uuid;
         annotation.ranges = req.body.ranges;
         annotation.permissions = req.body.permissions;
+        annotation.legacy = req.body.legacy;
 
         return annotation.save(function(err) {
             if (!err) {
