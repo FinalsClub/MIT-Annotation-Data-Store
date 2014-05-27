@@ -144,7 +144,12 @@ var Annotation = new Schema({
 var AnnotationModel = mongoose.model('Annotation', Annotation);
 
 // DB
-mongoose.connect(db);
+mongoose.connect(db, function(err) {
+    if (err)
+        console.error(err);
+    else
+        console.log('Database connection established');
+});
 
 // config
 app.configure(function() {
