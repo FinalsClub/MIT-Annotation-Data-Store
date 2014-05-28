@@ -2,7 +2,7 @@
 var application_root = __dirname,
     secret = process.env.SECRET,
     port = process.env.PORT,
-    db = process.env.DB,
+    db = process.env.MONGOLAB_URI || process.env.DB,
     consumer = process.env.CONSUMER,
     version = process.env.VERSION,
     path = require("path"),
@@ -144,7 +144,12 @@ var Annotation = new Schema({
 var AnnotationModel = mongoose.model('Annotation', Annotation);
 
 // DB
-mongoose.connect(db);
+mongoose.connect(db, function(err) {
+    if (err)
+        console.error(err);
+    else
+        console.log('Database connection established');
+});
 
 // config
 app.configure(function() {
