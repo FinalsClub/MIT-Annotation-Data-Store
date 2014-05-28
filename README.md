@@ -10,10 +10,12 @@ https://github.com/okfn/annotator-store
 + Create a heroku app `heroku apps:create $appname`
 + Add the Heroku add-on MongoLab `heroku addons:add mongolab`
 + Get MongoLab configuration settings `heroku config:pull`
-+ Edit the file named `.env` replace the word `MONGOLAB_URI` with `DB`
-+ Tell Heroku about your environment:
 
-    ```heroku config:add `cat .env` ```
+There may be times during development that you will want to use
+a MongoDB server other than the one hosted by mongolab. To do this,
+remove the `MONGOLAB_URI=` line in your `.env` file and add a `DB=`
+line with your new URI. The `MONGOLAB_URI` variable takes precedence
+over `DB`.
 
 ## Dependencies
 ### OKFN Annotator
